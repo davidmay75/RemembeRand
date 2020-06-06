@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+<title>RememberRand</title>
+</head>
+<body>
+    <div class="timer" id="timer"></div>
+
+    <div class="container">
+        <div class="strand-display" id="strand-display"></div>
+
+            <input class="answer-input" id="answer-input" rows="1" 
+                onkeypress="if(event.key == 'Enter') {checkAnswer()}" autofocus></input>     
+
+                <div class="settings">    
+                    <label for="strand-length">Length</label><br>
+                    <input type="Number" class="strand-length" id="strand-length" name="strand-length" value="4" width="4"></input><br>
+                    <label for="wait-time">Waiting Period(Sec)</label><br>
+                    <input type="Number" class="wait-time" id="wait-time" name="wait-time" value="4" width="4"></input><br>
+
+                    <button type="button" class="next-button" id="next-button">Next</button>
+                    <p id="result-text"></p>
+                </div>
+                    
+    </div>
+
+
+</body>
+</html>
