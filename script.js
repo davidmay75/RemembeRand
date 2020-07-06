@@ -2,19 +2,26 @@ const strandDisplayElement = document.getElementById('strand-display')
 const answerInputElement = document.getElementById('answer-input')
 const timerElement = document.getElementById('timer')
 const nextButtonElement = document.getElementById('next-button')
+const abortButtonElement = document.getElementById('abort-button')
 const strandLengthElement = document.getElementById('strand-length')
 const waitTimeElement = document.getElementById('wait-time')
 const accuracyElement = document.getElementById('accuracy')
 const resultTextElement = document.getElementById('result-text')
+const charChoiceElement = document.getElementById('char-choice')
 const interval = 1000
 const msBetweenQuestions = 5000
 
 var waitTime = waitTimeElement.value
 var strandLength = strandLengthElement.value
-answerInputElement.setAttribute('maxlength', strandLength)
+var charChoice = charChoiceElement.value
 var timer
+/*
+Make waiting period more appearant - countdown timer
+Scoreboard - Length, charChoice, Time 
+Fix adding letters
+*/
 
-///   FUNCTIONS
+///   TIME FUNCTIONS   ///
 let startTime 
 function startTimer() {
     timerElement.innerText = 0
@@ -32,28 +39,31 @@ function getTimerTime(){
 
 function resetTimer() {
     clearInterval(timer)
-    timerElement.innerText = 0
+    //timerElement.innerText = 0
+    timerElement.innerText = "GET READY FOR NEXT ROUND"
 }
 
 function resetAll() {   
     strandDisplayElement.innerText = null
-    answerInputElement.innerText = null
+    answerInputElement.innerText = ""
     resultTextElement.innerText = null
+    setAttributes()//answerInputElement.setAttribute('maxlength', strandLength)//make other function for this stuff SetFieldAttributes()
     resetTimer()
     timerElement.innerText = "GET READY"
 }
 
 function startQuestionMode() {
-    timerElement.innerText = 0
-    answerInputElement.innerText = null
-    strandDisplayElement.innerText = null
-    timerElement.innerText = "GET READY"
+    //timerElement.innerText = 0
+   // answerInputElement.innerText = null
+    //strandDisplayElement.innerText = null
+    //timerElement.innerText = "GET READY"
 
-    resetTimer()
+    //resetTimer()//also reset in check answer
+    resetAll()
     disableInput()
     unhideStrand()
     renderNewStrand()
-    setTimeout(startAnswerMode, waitTime*interval)
+    setTimeout(startAnswerMode, waitTime*interval)//make this happen with a button so that the delay isnt glitchy
 }
 
 function startAnswerMode() {
@@ -63,16 +73,35 @@ function startAnswerMode() {
     resultTextElement.innerText = ""
 }
 
-function getStrand(length) {
+/// STRAND FUNCTIONS ///
+function getStrand(length, charChoice) {//needs to fix passing in charChoice
     let strand = ''
-    for (i = 0; i<length; i++){
-        strand += Math.floor(Math.random()*10)
-    }
-    return strand
+    let strandArray = []
+
+    switch(charChoice){
+        case 1:
+            //letters only
+            for (i = 0; i<length; i++){
+                strandArray.push("A")
+            }      
+            
+        case  2:
+            //letters and numbers
+            for (i = 0; i<length; i++){
+                strandArray.push("B")
+            }     
+            
+        default://Numbers only
+            for (i = 0; i<length; i++){
+                strandArray.push(Math.floor(Math.random()*10))
+                //strand += Math.floor(Math.random()*10)
+            }         
+    }  
+    return strandArray.join("")
 }
 
 async function renderNewStrand() {
-    const strand = await getStrand(strandLength)
+    const strand = await getStrand(strandLength, charChoice)
     strandDisplayElement.innerText = ''
 
     strand.split('').forEach(character => {
@@ -83,22 +112,7 @@ async function renderNewStrand() {
     answerInputElement.value = null
 }
 
- function hideStrand(){
-    strandDisplayElement.style.display = "none"
- }
 
- function unhideStrand() {
-    strandDisplayElement.style.display = "block"
- }
-
- function enableInput() {
-    answerInputElement.disabled = false
-    answerInputElement.focus()
- }
-
- function disableInput() {
-    answerInputElement.disabled = true    
- }
 
  function checkAnswer() {
     const arrayStrand = strandDisplayElement.querySelectorAll('span')
@@ -121,15 +135,40 @@ async function renderNewStrand() {
         }
     })
     if (correct) {
-        resetTimer()
         resultTextElement.innerText = getTimerTime()
+        resetTimer()//timer inner text set here also       
         timerElement.innerText = getTimerTime()
-
-        setTimeout(startQuestionMode, msBetweenQuestions)    
+        timerElement.innerText = "GOOD JOB"
+        //setTimeout(startQuestionMode, msBetweenQuestions)    
+        return true
+    } else {
+        return false
     }
 }
 
-//Event Listeners
+/// DISPLAY FUNCTIONS ///
+function setAttributes() {
+    answerInputElement.setAttribute('maxlength', strandLength)
+    charChoice = charChoiceElement.value
+}
+function hideStrand(){
+    strandDisplayElement.style.display = "none"
+ }
+
+ function unhideStrand() {
+    strandDisplayElement.style.display = "block"
+ }
+
+ function enableInput() {
+    answerInputElement.disabled = false
+    answerInputElement.focus()
+ }
+
+ function disableInput() {
+    answerInputElement.disabled = true    
+ }
+
+/// Event Listeners ///
 nextButtonElement.addEventListener('keypress', function(event) {
     event.preventDefault();
     if(event.key === "Enter") {
@@ -138,8 +177,16 @@ nextButtonElement.addEventListener('keypress', function(event) {
     }
 })
 nextButtonElement.addEventListener('click', () => {
-    checkAnswer()
+    if (checkAnswer()) {
+        resetAll()
+        startQuestionMode()
+    }
 })
+abortButtonElement.addEventListener('click', () => {
+        resetAll()
+        startQuestionMode()
+})
+
 answerInputElement.addEventListener('input', () => {
     checkAnswer()
 } )
@@ -154,6 +201,11 @@ waitTimeElement.addEventListener('change', () => {
     waitTime = waitTimeElement.value    
     setTimeout(startQuestionMode, interval)
 })
+charChoiceElement.addEventListener('change', () => {
+    resetAll()
+    charChoice = charChoiceElement.value
+    startQuestionMode()
+})
 
-
+setAttributes()
 startQuestionMode()
