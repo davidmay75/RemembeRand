@@ -8,36 +8,44 @@
     <script src="script.js" defer></script>
 <title>RememberRand</title>
 </head>
+
 <body>
-    <div class="timer" id="timer"></div>
-
     <div class="container">
-        <div class="strand-display" id="strand-display"></div>
 
+        <div class="timer" id="timer">
+        </div>
+
+        <div class="strand-display">
+            <div class="strand" id="strand">
+            </div>
+        </div>
+        
+
+        <div class="input">
             <input class="answer-input" id="answer-input" rows="1" 
-                onkeypress="if(event.key == 'Enter') {checkAnswer()}" autofocus></input>     
+            onkeypress="if(event.key == 'Enter') {checkAnswer()}" autofocus></input>     
+        </div>
 
-                <div class="settings">    
-                    <label for="strand-length">Length</label><br>
-                    <input type="Number" class="strand-length" id="strand-length" name="strand-length" value="4" width="4"></input><br>
+        <div class="settings">    
+            <label for="strand-length">Length</label><br>
+            <input type="Number" class="strand-length" id="strand-length" name="strand-length" value="4" width="4"></input><br>
 
-                    <label for="wait-time">Waiting Period(Sec)</label><br>
-                    <input type="Number" class="wait-time" id="wait-time" name="wait-time" value="4" width="4"></input><br>
+            <label for="wait-time">Waiting Period(Sec)</label><br>
+            <input type="Number" class="wait-time" id="wait-time" name="wait-time" value="4" width="4"></input><br>
 
-                    <div class="dropdown">
-                        <select name="char-choice" id="char-choice">
-                            <option value="0">Numbers</option>
-                            <option value="1">Letters</option>
-                            <option value="2">Numbers + Letters</option>
-                        </select>
-                      </div>
+            <div class="dropdown">
+                <select name="char-choice" id="char-choice">
+                    <option value="0">Numbers</option>
+                    <option value="1">Letters</option>
+                    <option value="2">Numbers + Letters</option>
+                </select>
+              </div>
 
-                    <button type="button" class="next-button" id="next-button">Next</button>
-                    <button type="button" class="abort-button" id="abort-button">Abort</button>
+            <button type="button" class="next-button" id="next-button">Next</button>
+            <button type="button" class="abort-button" id="abort-button">Abort</button>
 
-                    <p id="result-text"></p>
-                </div>
-                    
+            <p id="result-text"></p>
+        </div>             
     </div>
 
 

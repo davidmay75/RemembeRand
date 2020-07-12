@@ -4,12 +4,10 @@
 
 body {
     position: relative;
-    display: flex;
+    min-height: 100vh;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;  
-    margin: 0;
-    background-color: rgb(0, 0, 0);
+
 }
 
 body, .quote-input {
@@ -20,40 +18,48 @@ input[type=number]{
     width: 40px;
 } 
 
+.timer {
+    font-size: 3rem;
+    font-weight: bold;
+    color: rgba(159, 0, 207, 0.911);
+}
+
+.strand-display { 
+    min-height:  3rem;
+}
+
+.strand {
+    color: rgb(0, 0, 0);
+    background-color: rgb(248, 0, 236);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    margin-left: calc(-1rem - 2px);
+    margin-left: calc(1rem + 2px);
+}
+
 .container {
-    position: relative;
-    color: rgb(0, 128, 0);
+        display: flex;
+        left: 50%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+         
     background-color:  rgb(0, 128, 0);
-    border: 2px solid rgb(70, 70, 70);
     padding: 1rem;
+    border: 2px solid rgb(70, 70, 70);
     border-radius: .5rem;
     width: 700px;
     max-width: 90%;
 }
 
+
 .settings {
-    display: flexbox;
+    color: lime;
     margin-top: 3rem;
     padding: 1rem;
     background-color: rgb(0, 0, 0);
     border: 2px solid rgb(36, 36, 36);    
     border-radius: .5rem;
-}
-
-.timer {
-    position: absolute;
-    top: 2rem;
-    font-size: 3rem;
-    color: rgb(0, 128, 0);
-    font-weight: bold;
-}
-
-.strand-display {
-    color: rgb(0, 0, 0);
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    margin-left: calc(-1rem - 2px);
-    margin-left: calc(1rem + 2px);
 }
 
 .answer-input {
@@ -72,7 +78,7 @@ input[type=number]{
 }
 
 .answer-input:focus {
-border-color: silver;
+border-color: rgb(0, 255, 0);
 }
 
 .correct {

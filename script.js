@@ -1,4 +1,4 @@
-const strandDisplayElement = document.getElementById('strand-display')
+const strandDisplayElement = document.getElementById('strand')
 const answerInputElement = document.getElementById('answer-input')
 const timerElement = document.getElementById('timer')
 const nextButtonElement = document.getElementById('next-button')
@@ -15,6 +15,7 @@ var waitTime = waitTimeElement.value
 var strandLength = strandLengthElement.value
 var charChoice = charChoiceElement.value
 var timer
+var strandAnswer
 /*
 Make waiting period more appearant - countdown timer
 Scoreboard - Length, charChoice, Time 
@@ -39,16 +40,16 @@ function getTimerTime(){
 
 function resetTimer() {
     clearInterval(timer)
-    //timerElement.innerText = 0
     timerElement.innerText = "GET READY FOR NEXT ROUND"
 }
 
 function resetAll() {   
-    strandDisplayElement.innerText = null
-    answerInputElement.innerText = ""
-    resultTextElement.innerText = null
+    
     setAttributes()//answerInputElement.setAttribute('maxlength', strandLength)//make other function for this stuff SetFieldAttributes()
     resetTimer()
+    strandDisplayElement.innerText = ""
+    answerInputElement.value = ""
+    resultTextElement.innerText = ""
     timerElement.innerText = "GET READY"
 }
 
@@ -109,7 +110,8 @@ async function renderNewStrand() {
         characterSpan.innerText = character
         strandDisplayElement.appendChild(characterSpan)
     })
-    answerInputElement.value = null
+    strandAnswer = strandDisplayElement.innerText
+    answerInputElement.value = ""
 }
 
 
@@ -137,7 +139,7 @@ async function renderNewStrand() {
     if (correct) {
         resultTextElement.innerText = getTimerTime()
         resetTimer()//timer inner text set here also       
-        timerElement.innerText = getTimerTime()
+        //timerElement.innerText = getTimerTime()
         timerElement.innerText = "GOOD JOB"
         //setTimeout(startQuestionMode, msBetweenQuestions)    
         return true
@@ -153,6 +155,8 @@ function setAttributes() {
 }
 function hideStrand(){
     strandDisplayElement.style.display = "none"
+    
+    //strandDisplayElement.innerText = "   "
  }
 
  function unhideStrand() {
@@ -194,17 +198,14 @@ strandLengthElement.addEventListener('change', () => {
     resetAll()
     strandLength = strandLengthElement.value
     answerInputElement.setAttribute('maxlength', strandLength)
-    setTimeout(startQuestionMode, interval)
 })
 waitTimeElement.addEventListener('change', () => {
     resetAll()
     waitTime = waitTimeElement.value    
-    setTimeout(startQuestionMode, interval)
 })
 charChoiceElement.addEventListener('change', () => {
     resetAll()
     charChoice = charChoiceElement.value
-    startQuestionMode()
 })
 
 setAttributes()
