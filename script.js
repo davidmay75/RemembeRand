@@ -17,6 +17,7 @@ var charChoice = charChoiceElement.value
 var timer
 var strandAnswer
 /*
+Hide timer
 Make waiting period more appearant - countdown timer
 Scoreboard - Length, charChoice, Time 
 Fix adding letters

@@ -1,27 +1,43 @@
 * {
     box-sizing: border-box;
+    font-family: Inconsolata, monospace;
 }
 
 body {
+    background-color: black;
+    background-image: radial-gradient( rgba(0, 150, 0, 0.75), black 120%);
+    height: 100vh;
+    
     position: relative;
     min-height: 100vh;
     justify-content: center;
     align-items: center;
-
-}
-
-body, .quote-input {
-    font-family: 'Courier New', Courier, monospace;
 }
 
 input[type=number]{
     width: 40px;
 } 
 
+.container {
+    margin: 0 auto;
+    display: flex;
+    left: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+     
+background-color:  rgba(119, 119, 119, 0.644);
+padding: 1rem;
+border: 2px solid rgb(70, 70, 70);
+border-radius: .5rem;
+width: 700px;
+max-width: 90%;
+}
+
 .timer {
     font-size: 3rem;
     font-weight: bold;
-    color: rgba(159, 0, 207, 0.911);
+    color: rgba(0, 0, 0, 0.842);
 }
 
 .strand-display { 
@@ -30,36 +46,36 @@ input[type=number]{
 
 .strand {
     color: rgb(0, 0, 0);
-    background-color: rgb(248, 0, 236);
+    
+font-family: Inconsolata, monospace;
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin: 1rem;
     margin-left: calc(-1rem - 2px);
     margin-left: calc(1rem + 2px);
 }
 
-.container {
-        display: flex;
-        left: 50%;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-         
-    background-color:  rgb(0, 128, 0);
-    padding: 1rem;
-    border: 2px solid rgb(70, 70, 70);
-    border-radius: .5rem;
-    width: 700px;
-    max-width: 90%;
+
+.dropdown{
+    background-color: rgba(0, 0, 0);
+    color: rgba(0, 255, 0, 0.500);
 }
-
-
 .settings {
-    color: lime;
-    margin-top: 3rem;
+    color: rgba(0, 255, 0, 0.500);
+    margin: 3rem;
     padding: 1rem;
     background-color: rgb(0, 0, 0);
     border: 2px solid rgb(36, 36, 36);    
     border-radius: .5rem;
+}
+.settings, input{
+    background-color: rgba(0, 0, 0);
+    color: rgba(0, 255, 0, 0.500);
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.75);
+}
+.settings, button{
+    background-color: rgba(0, 0, 0);
+    color: rgba(0, 255, 0, 0.500);
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.75);
 }
 
 .answer-input {
@@ -78,7 +94,8 @@ input[type=number]{
 }
 
 .answer-input:focus {
-border-color: rgb(0, 255, 0);
+        outline-width: 0;
+
 }
 
 .correct {
@@ -88,4 +105,8 @@ border-color: rgb(0, 255, 0);
 .incorrect {
     color: rgb(255, 115, 0);
     text-decoration: underline;
+}
+
+.strand-length {
+    
 }
