@@ -13,7 +13,7 @@ const msBetweenQuestions = 5000
 
 var waitTime = waitTimeElement.value
 var strandLength = strandLengthElement.value
-var charChoice = charChoiceElement.value
+var charChoice = charChoiceElement.value//find this
 var timer
 var strandAnswer
 /*
@@ -41,7 +41,7 @@ function getTimerTime(){
 
 function resetTimer() {
     clearInterval(timer)
-    timerElement.innerText = "GET READY FOR NEXT ROUND"
+    timerElement.innerText = "PREPARE FOR NEXT ROUND"
 }
 
 function resetAll() {   
@@ -51,16 +51,10 @@ function resetAll() {
     strandDisplayElement.innerText = ""
     answerInputElement.value = ""
     resultTextElement.innerText = ""
-    timerElement.innerText = "GET READY"
+    timerElement.innerText = "0:00"
 }
 
 function startQuestionMode() {
-    //timerElement.innerText = 0
-   // answerInputElement.innerText = null
-    //strandDisplayElement.innerText = null
-    //timerElement.innerText = "GET READY"
-
-    //resetTimer()//also reset in check answer
     resetAll()
     disableInput()
     unhideStrand()
@@ -76,30 +70,39 @@ function startAnswerMode() {
 }
 
 /// STRAND FUNCTIONS ///
-function getStrand(length, charChoice) {//needs to fix passing in charChoice
+function getStrand(length, charChoice) {
     let strand = ''
     let strandArray = []
 
-    switch(charChoice){
-        case 1:
-            //letters only
-            for (i = 0; i<length; i++){
-                strandArray.push("A")
+    if (charChoice == 0) {
+        for (i = 0; i<length; i++){
+            strandArray.push(Math.floor(Math.random()*10))
+        }      
+    }
+    else if (charChoice == 1){        
+        for (i = 0; i<length; i++){
+            strandArray.push(randomChar())
+        } 
+    }
+    else if (charChoice == 2){
+        for (i = 0; i<length; i++){
+            if (i % 2 == 0) {
+                strandArray.push(randomChar())
+            }
+            else {
+                strandArray.push(randomNumber(9))
             }      
-            
-        case  2:
-            //letters and numbers
-            for (i = 0; i<length; i++){
-                strandArray.push("B")
-            }     
-            
-        default://Numbers only
-            for (i = 0; i<length; i++){
-                strandArray.push(Math.floor(Math.random()*10))
-                //strand += Math.floor(Math.random()*10)
-            }         
-    }  
+        } 
+    }
     return strandArray.join("")
+}
+
+function randomNumber(max){
+    return Math.floor(Math.random()*10) % max
+}
+function randomChar(){
+    let lower = "abcdefghijklmnopqrstuvwxyz"
+    return lower[randomNumber(25)]
 }
 
 async function renderNewStrand() {
@@ -118,46 +121,65 @@ async function renderNewStrand() {
 
 
  function checkAnswer() {
-    const arrayStrand = strandDisplayElement.querySelectorAll('span')
-    const arrayInputValue = answerInputElement.value.split('')
-    let correct = true
+     //let arrayInput = answerInputElement.value.split('')
+     let input = answerInputElement.value
+     console.log(typeof input)
+     console.log(input)
+     
+     
+     //let arrayAnswer = strandDisplayElement.querySelectorAll('span')
+     let answer = strandAnswer
+     console.log(typeof answer)
+     console.log(answer)
 
-    arrayStrand.forEach((characterSpan, index) => {
-        const character = arrayInputValue[index]
-        if (character == null){
-            characterSpan.classList.remove('incorrect')
-            characterSpan.classList.remove('correct')
-            correct = false
-        }else if (character === characterSpan.innerText) {
-            characterSpan.classList.add('correct')
-            characterSpan.classList.remove('incorrect')
-        } else {
-            characterSpan.classList.remove('correct')
-            characterSpan.classList.add('incorrect')
-            correct = false
-        }
-    })
-    if (correct) {
+     if (input == answer){
         resultTextElement.innerText = getTimerTime()
         resetTimer()//timer inner text set here also       
-        //timerElement.innerText = getTimerTime()
-        timerElement.innerText = "GOOD JOB"
-        //setTimeout(startQuestionMode, msBetweenQuestions)    
-        return true
-    } else {
-        return false
-    }
+        timerElement.innerText = resultTextElement.innerText      
+           console.log("correct")   
+          return true
+     }else{
+         return false
+     }
+    // const arrayStrand = strandDisplayElement.querySelectorAll('span')
+    // const arrayInputValue = answerInputElement.value.split('')
+    // let correct = true
+
+    // arrayStrand.forEach((characterSpan, index) => {
+    //     const character = arrayInputValue[index]
+
+    //     if (character == null){
+    //         characterSpan.classList.remove('incorrect')
+    //         characterSpan.classList.remove('correct')
+    //         correct = false
+    //     }else if (character === characterSpan.innerText) {
+    //         characterSpan.classList.add('correct')
+    //         characterSpan.classList.remove('incorrect')
+    //     } else {
+    //         characterSpan.classList.remove('correct')
+    //         characterSpan.classList.add('incorrect')
+    //         correct = false
+    //     }
+    // })
+    // if (correct) {
+    //     resultTextElement.innerText = getTimerTime()
+    //     resetTimer()//timer inner text set here also       
+    //     timerElement.innerText = "CORRECT"
+    //     //setTimeout(startQuestionMode, msBetweenQuestions)    
+    //     return true
+    // } else {
+    //     return false
+    // }
 }
 
 /// DISPLAY FUNCTIONS ///
 function setAttributes() {
     answerInputElement.setAttribute('maxlength', strandLength)
     charChoice = charChoiceElement.value
+    console.log(charChoice)
 }
 function hideStrand(){
     strandDisplayElement.style.display = "none"
-    
-    //strandDisplayElement.innerText = "   "
  }
 
  function unhideStrand() {
@@ -186,12 +208,16 @@ nextButtonElement.addEventListener('click', () => {
         resetAll()
         startQuestionMode()
     }
+    else{
+        console.log("Cheater")
+        resetAll()
+        startQuestionMode()
+    }
 })
 abortButtonElement.addEventListener('click', () => {
         resetAll()
         startQuestionMode()
 })
-
 answerInputElement.addEventListener('input', () => {
     checkAnswer()
 } )
