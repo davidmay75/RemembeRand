@@ -10,10 +10,10 @@
 </head>
 
 <body>
+    <h1>RemembeRand</h1>
     <div class="container">
 
-        <div class="timer" id="timer">
-        </div>
+        
 
         <div class="strand-display">
             <div class="strand" id="strand">
@@ -22,7 +22,7 @@
         
 
         <div class="input">
-            <input class="answer-input" id="answer-input" rows="1" 
+            <input class="answer-input" id="answer-input" rows="1" spellcheck="false"
             onkeypress="if(event.key == 'Enter') {checkAnswer()}" autofocus></input>     
         </div>
 
@@ -45,7 +45,11 @@
             <button type="button" class="abort-button" id="abort-button">Abort</button>
 
             <p id="result-text"></p>
-        </div>             
+        </div>    
+
+        <div class="timer" id="timer">
+        </div>  
+
     </div>
 
 

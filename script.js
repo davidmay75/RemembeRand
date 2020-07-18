@@ -20,7 +20,6 @@ var strandAnswer
 Hide timer
 Make waiting period more appearant - countdown timer
 Scoreboard - Length, charChoice, Time 
-Fix adding letters
 */
 
 ///   TIME FUNCTIONS   ///
@@ -134,7 +133,8 @@ async function renderNewStrand() {
 
      if (input == answer){
         resultTextElement.innerText = getTimerTime()
-        resetTimer()//timer inner text set here also       
+        resetTimer()//timer inner text set here also    
+        timerElement.innerText = "CORRECT"   
         timerElement.innerText = resultTextElement.innerText      
            console.log("correct")   
           return true
