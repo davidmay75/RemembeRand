@@ -178,6 +178,9 @@ function setAttributes() {
     charChoice = charChoiceElement.value
     console.log(charChoice)
 }
+function hideTimer(){
+    timerElement.style.display = "none"
+ }
 function hideStrand(){
     strandDisplayElement.style.display = "none"
  }
@@ -237,3 +240,4 @@ charChoiceElement.addEventListener('change', () => {
 
 setAttributes()
 startQuestionMode()
+hideTimer()
