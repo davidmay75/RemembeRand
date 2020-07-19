@@ -87,6 +87,7 @@ input[type=number]{
     font-size: 2rem;
     border-radius: .5rem;
     overflow: hidden;
+    text-transform: lowercase
 }
 .answer-input:focus {
         outline-width: 0;
@@ -101,4 +102,6 @@ h1 {
     font-weight: lighter;
     text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
     text-align: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }

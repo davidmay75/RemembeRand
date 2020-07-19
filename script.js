@@ -118,11 +118,10 @@ function checkAnswer() {
     let input = answerInputElement.value
     let answer = strandAnswer
 
-    if (input === answer){
+    if (input.toLowerCase() === answer.toLowerCase()){
         resultTextElement.innerText = getTimerTime()
         resetTimer()//timer inner text set here also    
         timerElement.innerText = resultTextElement.innerText      
-        console.log("correct")   
         answerInputElement.classList.add('correct')
         return true
     }
@@ -135,7 +134,6 @@ function checkAnswer() {
 function setAttributes() {
     answerInputElement.setAttribute('maxlength', strandLength)
     charChoice = charChoiceElement.value
-    console.log(charChoice)
 }
 function hideTimer(){
     timerElement.style.display = "none"
@@ -168,7 +166,6 @@ nextButtonElement.addEventListener('click', () => {
         startQuestionMode()
     }
     else{
-        console.log("Cheater")
         resultTextElement.innerText = "Cheater"
         resetAll()
         startQuestionMode()
