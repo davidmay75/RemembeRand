@@ -2,7 +2,6 @@ const strandDisplayElement = document.getElementById('strand')
 const answerInputElement = document.getElementById('answer-input')
 const timerElement = document.getElementById('timer')
 const nextButtonElement = document.getElementById('next-button')
-const abortButtonElement = document.getElementById('abort-button')
 const strandLengthElement = document.getElementById('strand-length')
 const waitTimeElement = document.getElementById('wait-time')
 const accuracyElement = document.getElementById('accuracy')
@@ -16,9 +15,7 @@ var strandLength = strandLengthElement.value
 var charChoice = charChoiceElement.value//find this
 var timer
 var strandAnswer
-/*
-Hide timer
-Make waiting period more appearant - countdown timer
+/* To Do
 Scoreboard - Length, charChoice, Time 
 */
 
@@ -40,17 +37,17 @@ function getTimerTime(){
 
 function resetTimer() {
     clearInterval(timer)
-    timerElement.innerText = "PREPARE FOR NEXT ROUND"
 }
 
-function resetAll() {   
-    
+function resetAll() {    
     setAttributes()//answerInputElement.setAttribute('maxlength', strandLength)//make other function for this stuff SetFieldAttributes()
     resetTimer()
     strandDisplayElement.innerText = ""
     answerInputElement.value = ""
+    answerInputElement.classList.remove('correct')
     resultTextElement.innerText = ""
     timerElement.innerText = "0:00"
+    hideTimer()
 }
 
 function startQuestionMode() {
@@ -85,7 +82,7 @@ function getStrand(length, charChoice) {
     }
     else if (charChoice == 2){
         for (i = 0; i<length; i++){
-            if (i % 2 == 0) {
+            if (Math.random() < 0.5) {
                 strandArray.push(randomChar())
             }
             else {
@@ -117,59 +114,21 @@ async function renderNewStrand() {
     answerInputElement.value = ""
 }
 
+function checkAnswer() {
+    let input = answerInputElement.value
+    let answer = strandAnswer
 
-
- function checkAnswer() {
-     //let arrayInput = answerInputElement.value.split('')
-     let input = answerInputElement.value
-     console.log(typeof input)
-     console.log(input)
-     
-     
-     //let arrayAnswer = strandDisplayElement.querySelectorAll('span')
-     let answer = strandAnswer
-     console.log(typeof answer)
-     console.log(answer)
-
-     if (input == answer){
+    if (input === answer){
         resultTextElement.innerText = getTimerTime()
         resetTimer()//timer inner text set here also    
-        timerElement.innerText = "CORRECT"   
         timerElement.innerText = resultTextElement.innerText      
-           console.log("correct")   
-          return true
-     }else{
-         return false
-     }
-    // const arrayStrand = strandDisplayElement.querySelectorAll('span')
-    // const arrayInputValue = answerInputElement.value.split('')
-    // let correct = true
-
-    // arrayStrand.forEach((characterSpan, index) => {
-    //     const character = arrayInputValue[index]
-
-    //     if (character == null){
-    //         characterSpan.classList.remove('incorrect')
-    //         characterSpan.classList.remove('correct')
-    //         correct = false
-    //     }else if (character === characterSpan.innerText) {
-    //         characterSpan.classList.add('correct')
-    //         characterSpan.classList.remove('incorrect')
-    //     } else {
-    //         characterSpan.classList.remove('correct')
-    //         characterSpan.classList.add('incorrect')
-    //         correct = false
-    //     }
-    // })
-    // if (correct) {
-    //     resultTextElement.innerText = getTimerTime()
-    //     resetTimer()//timer inner text set here also       
-    //     timerElement.innerText = "CORRECT"
-    //     //setTimeout(startQuestionMode, msBetweenQuestions)    
-    //     return true
-    // } else {
-    //     return false
-    // }
+        console.log("correct")   
+        answerInputElement.classList.add('correct')
+        return true
+    }
+    else{
+        return false
+    }   
 }
 
 /// DISPLAY FUNCTIONS ///
@@ -180,20 +139,17 @@ function setAttributes() {
 }
 function hideTimer(){
     timerElement.style.display = "none"
- }
+}
 function hideStrand(){
     strandDisplayElement.style.display = "none"
  }
-
  function unhideStrand() {
     strandDisplayElement.style.display = "block"
  }
-
  function enableInput() {
     answerInputElement.disabled = false
     answerInputElement.focus()
  }
-
  function disableInput() {
     answerInputElement.disabled = true    
  }
@@ -213,13 +169,10 @@ nextButtonElement.addEventListener('click', () => {
     }
     else{
         console.log("Cheater")
+        resultTextElement.innerText = "Cheater"
         resetAll()
         startQuestionMode()
     }
-})
-abortButtonElement.addEventListener('click', () => {
-        resetAll()
-        startQuestionMode()
 })
 answerInputElement.addEventListener('input', () => {
     checkAnswer()

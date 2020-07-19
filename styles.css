@@ -18,15 +18,13 @@ input[type=number]{
 
 .container {
     margin: 0 auto;
-    margin-top: 4rem;
     display: flex;
-    left: 50%;
     flex-direction: column;
-    justify-content: center;
     align-items: center;    
     background-color:  rgba(49, 49, 49, 0.644);
     padding: 1rem;
-    border: 2px solid rgb(36, 36, 36);    border-radius: .5rem;
+    border: 2px solid rgb(36, 36, 36);    
+    border-radius: .5rem;
     width: 700px;
     max-width: 90%;
 }
@@ -78,6 +76,7 @@ input[type=number]{
 .answer-input {
     color:  rgb(0, 255, 0);
     font-family: 'Courier New', monospace;
+    text-align: center;
     background-color: rgb(0, 0, 0);
     border: 2px solid rgb(36, 36, 36);
     width: 100%;
@@ -92,11 +91,14 @@ input[type=number]{
 .answer-input:focus {
         outline-width: 0;
 }
+.correct {
+    text-shadow: 0 0 15px rgba(0, 255, 0, 0.95);
+    font-weight: bolder;
+}
 
 h1 {
-    font-size: 4rem;
+    font-size: 4em;
     font-weight: lighter;
     text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
     text-align: center;
-    padding-top: 1rem;
 }
