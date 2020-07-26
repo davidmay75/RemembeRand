@@ -20,10 +20,21 @@
                 <div class="settings">    
                     <label for="strand-length">Length</label><br>
                     <input type="Number" class="strand-length" id="strand-length" name="strand-length" value="4" width="4"></input><br>
+
                     <label for="wait-time">Waiting Period(Sec)</label><br>
                     <input type="Number" class="wait-time" id="wait-time" name="wait-time" value="4" width="4"></input><br>
 
+                    <div class="dropdown">
+                        <select name="char-choice" id="char-choice">
+                            <option value="0">Numbers</option>
+                            <option value="1">Letters</option>
+                            <option value="2">Numbers + Letters</option>
+                        </select>
+                      </div>
+
                     <button type="button" class="next-button" id="next-button">Next</button>
+                    <button type="button" class="abort-button" id="abort-button">Abort</button>
+
                     <p id="result-text"></p>
                 </div>
                     
