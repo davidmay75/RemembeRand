@@ -60,18 +60,13 @@ input[type=number]{
     border: 2px solid rgb(36, 36, 36);    
     border-radius: .5rem;
 }
-.settings, input{
+.settings, input, button{
     background-color: rgba(0, 0, 0);
     color: rgba(0, 255, 0, 0.500);
     text-shadow: 0 0 5px rgba(0, 255, 0, 0.75);
     margin-bottom: 1rem;
 }
-.settings, button{
-    background-color: rgba(0, 0, 0);
-    color: rgba(0, 255, 0, 0.500);
-    text-shadow: 0 0 5px rgba(0, 255, 0, 0.75);
-    margin-top: 1rem;
-}
+
 
 .answer-input {
     color:  rgb(0, 255, 0);
