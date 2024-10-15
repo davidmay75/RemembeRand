@@ -1,0 +1,22 @@
+@import '_variables';
+
+
+body {
+    background-color: $primary;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+h1 {
+    color: rgb(190, 190, 190);
+}
+
+input {
+    height: 1em;
+    font-size: 50px;
+    border-radius: 10px;
+}
+// input:-webkit-autofill::first-line {
+//     height: 1em;
+//     font-size: 50px;
+//     border-radius: 10px;
+// }
