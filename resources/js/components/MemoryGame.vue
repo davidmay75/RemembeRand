@@ -1,6 +1,6 @@
 <!-- MemoryGame.vue -->
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 
 const gameState = ref('config') // config, ready, showing, testing, complete
 const userInput = ref('')
@@ -75,22 +75,26 @@ const startChallenge = () => {
     // Hide the string after configured displayTime
     setTimeout(() => {
         displayString.value = ''
-        // gameState.value = 'testing'
 
         if (config.value.delayTime > 0) {
             gameState.value = 'delaying'
 
             setTimeout(() => {
                 gameState.value = 'testing'
-                console.log('resume')
-
+                setFocus()
             }, config.value.delayTime * 1000)
         } else {
             gameState.value = 'testing'
+            setFocus()
         }
-
     }, config.value.displayTime * 1000)
 }
+
+const setFocus = () => {
+      nextTick(() => {
+        document.getElementById('user-input').focus()
+      });
+    };
 
 const checkAnswer = () => {
     const isCorrect = hashString(userInput.value.toUpperCase()) === challengeHash.value
@@ -199,7 +203,9 @@ const startGame = () => {
                 <!-- Testing State -->
                 <div v-if="gameState === 'testing'" class="testing-state">
                     <p>What was the string?</p>
-                    <input v-model="formattedInput" type="text" :maxlength="config.length" @keyup.enter="checkAnswer">
+                    <!-- <input ref="formattedInput" type="text" :maxlength="config.length" @keyup.enter="checkAnswer"> -->
+                    <!-- <input v-model="formattedInput" type="text" :maxlength="config.length" @keyup.enter="checkAnswer"> -->
+                    <input id="user-input" v-model="formattedInput" type="text" :maxlength="config.length" @keyup.enter="checkAnswer">
                     <button @click="checkAnswer">Check Answer</button>
                 </div>
 
