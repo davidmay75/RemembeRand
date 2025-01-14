@@ -10,11 +10,10 @@ class GameController extends Controller
         $input = $request->validate([
             'time' => 'numeric|required|max:255',
             'characters' => 'string|required',
-            'time' => 'numeric|required',
             'input_delay' => 'numeric|required',
         ]);
 
-        $input['question'] = 'abc123';//generate
+        $input['question'] = 'abc123'; //generate
 
         return view('game', $input);
     }
