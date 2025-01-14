@@ -1,4 +1,4 @@
-<x-layout>
+<layouts.app>
     {{-- <x-game-settings-form/> --}}
     <canvas id="canvas">Canvas is not supported in your browser.</canvas>
     <canvas id="canvas2">Canvas is not supported in your browser.</canvas> 
@@ -7,7 +7,7 @@
         <h1>Rememberand</h1>
         <h2>Coming soon</h2>
     </div>
-</x-layout>
+</layouts.app>
 
 <style>
     body {

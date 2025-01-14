@@ -1,4 +1,4 @@
-<x-layout>
+<layouts.app>
     <div class="game-container">
         <form action="/game/answer" method="POST">
             @csrf
@@ -9,4 +9,4 @@
             <button>Submit</button>
         </form>
     </div>
-</x-layout>
+</layouts.app>

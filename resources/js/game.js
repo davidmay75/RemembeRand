@@ -1,0 +1,2 @@
+const questionField = '';
+const answerField = '';
