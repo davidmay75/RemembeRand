@@ -10,6 +10,12 @@ const challengeHash = ref('')
 const displayString = ref('')
 const answer = ref('')//temp
 
+// const rawInput = ref('')
+const formattedInput = computed({
+  get: () => userInput.value.toUpperCase(),
+  set: (value) => userInput.value = value.toUpperCase()
+})
+
 // Game configuration
 const config = ref({
     useNumbers: true,
@@ -193,7 +199,7 @@ const startGame = () => {
                 <!-- Testing State -->
                 <div v-if="gameState === 'testing'" class="testing-state">
                     <p>What was the string?</p>
-                    <input v-model="userInput" type="text" :maxlength="config.length" @keyup.enter="checkAnswer">
+                    <input v-model="formattedInput" type="text" :maxlength="config.length" @keyup.enter="checkAnswer">
                     <button @click="checkAnswer">Check Answer</button>
                 </div>
 
@@ -209,7 +215,7 @@ const startGame = () => {
                 <!-- Failed State -->
                 <div v-if="gameState === 'failed'" class="failed-state">                    
                     <input v-model="answer" type="text" disabled class="wrong">
-                    <input v-model="userInput" type="text" disabled>
+                    <input v-model="formattedInput" type="text" disabled>
                     
                     
                     <div class="alert">{{ feedback }}</div>
