@@ -2,21 +2,14 @@
 
 
 body {
-    background-color: $primary;
-    font-family: "Lucida Console", "Courier New", monospace;
+    background-color: red;
+    margin: 0 !important;
+    // background-color: $primary;
+    // font-family: "Lucida Console", "Courier New", monospace;
 }
 
 h1 {
     color: rgb(190, 190, 190);
-}
-
-#app {
-    background-color: red;
-    font-family: monospace;
-}
-
-.config-state {
-    background-color: red !important;
 }
 
 // input:-webkit-autofill::first-line {

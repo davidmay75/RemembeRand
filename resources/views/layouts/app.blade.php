@@ -20,6 +20,9 @@
     #app {
         font-family: monospace;
     }
+    body {
+        margin: 0;
+    }
 
 
 </style>
