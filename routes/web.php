@@ -1,20 +1,22 @@
 <?php
 
-use App\Http\Controllers\GameController;
+// use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('index');
-});
-Route::get('/play', function () {
-    return view('play');
-});
-Route::get('/vue', function () {
-    // dd(123);
-    return view('vue');
+    return view('game');
 });
 
-Route::post('/game', [GameController::class, 'index']);
-Route::post('/game/answer', [GameController::class, 'answer']);
+Route::get('/coming-soon', function () {
+    return view('coming-soon');
+});
+
+// Route::get('/play', function () {
+//     return view('play');
+// });
+
+
+// Route::post('/game', [GameController::class, 'index']);
+// Route::post('/game/answer', [GameController::class, 'answer']);
 
 

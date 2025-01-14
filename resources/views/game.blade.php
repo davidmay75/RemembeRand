@@ -1,12 +1,6 @@
-<layouts.app>
-    <div class="game-container">
-        <form action="/game/answer" method="POST">
-            @csrf
-            {{-- <p name="question">{{$question}}</p> --}}
-            <input type="text" name="question" value={{$question}}>
-            <input type="text" name="answer" class="answer">
+@extends('layouts.app')
 
-            <button>Submit</button>
-        </form>
-    </div>
-</layouts.app>
+@section('content')
+    {{-- <game-settings></game-settings> --}}
+    <memory-game></memory-game>
+@endsection
